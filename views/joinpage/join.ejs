@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0 auto;
+            padding: 0;
+        }
+        body{
+            position: flex;
+            justify-content: center;
+            align-content: center;
+            flex-flow: column;
+        }
+        .container{
+            position:relative;
+            margin: 0px 0px 0px 780px;
+            padding: 60px 100px;
+            width: 400px;
+            height: 600px;
+            border-radius: 15px;
+        }
+        li {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        h1{
+            text-align: center;
+            margin: 60px 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+        hr{
+            width: 600px;
+            align-content: center;
+        }
+        .container ul li input{
+            border: none;
+            border-bottom: 2px solid black;
+            background:white;
+            outline:none;
+        }
+        #check{
+            border-radius: 5px;
+            border:2px solid black;
+        }
+
+    </style>
+    
+</head>
+<body>  
+    <h1>회원가입</h1>
+    <hr/>
+    <div class="container">
+        <form action="" method="POST" id="form">
+            <ul>
+                <li><input type="checkbox" value="true" name="lawyer">변호사면 체크</li>
+                <label>
+                    아이디<li><input type="text" name="id" id="id" required> <button type="button" id="check">ID
+                            중복확인</button></li>
+                </label>
+                <label>
+                    비밀번호<li><input type="password" name="pw" id="pw" required></li>
+                </label>
+                <label>
+                    비밀번호확인<li><input type="password" name="pwchk" id="pwchk" required></li>
+                </label>
+                <label>
+                    이름<li><input type="text" name="name" id="name" required></li>
+                </label>
+                <label>
+                    생년월일<li><input type="date" name="birth" id="birth" required></li>
+                </label>
+                <label>
+                    성별<li>남<input type="radio" value="남" name="gender" id="gender1" required>
+                        여<input type="radio" value="여" name="gender" id="gender0" required></li>
+                </label>
+                <label>
+                    지역<li>
+                        <select id="select1" onChange="categoryChange(this)" style="width: 89px;" name="si"
+                            form="form"></select>
+                        <select id="gu" style="width: 82px;" name="gun" form="form">
+                            <option>군/구 선택</option>
+                        </select>
+                    </li>
+                </label>
+                <label>
+                    전화번호<li><input type="number" name="phone" id="phone" required></li>
+                    <input type="submit" value="회원가입">
+                </label>
+            </ul>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="script/address.js"></script>
+    <script src="script/checkId.js"></script>
+</body>
+</html>
