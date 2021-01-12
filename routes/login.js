@@ -68,6 +68,7 @@ router.post("/local-login", function(req, res, next) {
         }
         req.logIn(user, function(err) {
             if(err) return next(err);
+            //메인페이지
             return res.redirect('/main');
         });
     }
@@ -75,7 +76,7 @@ router.post("/local-login", function(req, res, next) {
 
 //kakao-login으로 접속하면 kakao 전략을 실행
 router.get("/kakao-login", passport.authenticate("kakao", { //요청 인증 후 성공, 실패 여부 확인 후 redirect
-    successRedirect : "/main",
+    successRedirect : "/",
     failureRedirect : "/auth/fail"
 })); 
 

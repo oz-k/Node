@@ -1,15 +1,11 @@
 const router = require('express').Router();
 
 router.get('/', function(req, res) { //메인창
-    if(req.isAuthenticated()) { //사용자가 인증되어있는 상태를 확인해 boolean 반환
-        res.render("./mainpage/main.ejs", {username: req.user.name, userid: req.user.dataValues.userId});
-        return;
-    }
-    res.redirect('/login');
+    res.render("./mainpage/main.ejs");
 });
 
 router.get('/main', async function(req, res) {
-    if(req.isAuthenticated()) {
+    if(req.isAuthenticated()) { //사용자가 인증되어있는 상태를 확인해 boolean 반환
         var lawyerData = [];
         if(req.user.constructor.name === 'User') {
             const model = require('../models');
