@@ -2,4 +2,3 @@ node_modules
 ssl
 resources/image
 *.env
-.gitignore
