@@ -22,6 +22,7 @@
             background-color: none;
         }
         #chatArea {
+            background-color: white;
             overflow-y:scroll;
         }
         #chatArea::-webkit-scrollbar {
@@ -79,6 +80,11 @@
             border-bottom:1px solid black;
             background-color: white;
         }
+        video {
+            border: 1px solid black;
+            width:640px;
+            height:360px; 
+        }
     </style>
 </head>
 <body>
@@ -96,6 +102,19 @@
         </div>
     <%}%>
 
+    <video id="localVideo" autoplay></video>
+    <video id="remoteVideo" autoplay></video>
+    <audio id="remoteAudio" autoplay></audio>
+    <video id="localDisplay" autoplay></video>
+    <video id="remoteDisplay" autoplay></video>
+    <p>
+        <button id="video" type="button">캠 켜기</button>
+        <button id="display" type="button">화면공유</button>
+        <button id="mute" type="button">음소거</button>
+        <button id="hangup" type="button">전화 끊기</button>
+    </p>
+    <div id="deviceList" style="display: flex;"></div>
+    
     <div id='chatList'></div>
 
     <button id='showChat' type="button">채팅목록</button>

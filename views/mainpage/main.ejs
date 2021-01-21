@@ -13,13 +13,38 @@
     </style>
 </head>
 <body>
-    <video id="local" src="" autoplay></video>
-    <div id="deviceList" style="display: flex;">
-    </div>
+    <video id="local" src="" autoplay muted></video>
+    <video id="remote" src="" autoplay></video>
+    <div id="deviceList" style="display: flex;"></div>
+    
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script> <!--jquery-->
+    <script src="/socket.io/socket.io.js"></script> <!--socket-->
     <script>
+        const namespace = io('/rtc');
         var localVideo = document.getElementById('local');
+        var remoteVideo = document.getElementById('remote');
+        const iceServer = {'iceServers':[{'url':'stun:stun.l.google.com:19302'}]};
+        var peerConnection = new RTCPeerConnection(iceServer);
         var localStream;
         
+        namespace.on('signaling', function(msg) {
+            if(msg.type === 'sendOffer') { //요청 보내기
+                peerConnection.createOffer(function(sdp) { //연결 요청
+                    namespace.emit('sendSignal', {'type':'sendOffer', 'sdp':sdp});
+                    peerConnection.setLocalDescription(sdp); //내 sdp 설정
+                });
+            } else if(msg.type === 'sendAnswer') { //응답 보내기
+                peerConnection.setRemoteDescription(new RTCSessionDescription(sdp)); //상대 sdp 세팅
+                peerConnection.createAnswer(function(sdp) {
+                    namespace.emit('sendSignal', {'type':'sendAnswer', 'sdp':sdp});
+                    peerConnection.setLocalDescription(sdp); //내 sdp 설정
+                });
+            } else if(msg.type === 'bringAnswer') { //응답 받기
+                peerConnection.setRemoteDescription(new RTCSessionDescription(msg.sdp)); //상대 sdp 세팅
+            }
+            console.log(msg.type, msg.sdp);
+        });
+
         navigator.mediaDevices.ondevicechange = findDevice;
         function findDevice() {
             navigator.mediaDevices.enumerateDevices().then(function(deviceInfos) {

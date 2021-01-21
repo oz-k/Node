@@ -43,7 +43,7 @@ function chat(myName) {
         webcam.onclick = function(event) {
             event.stopPropagation();
             //webRTC.js
-            webRTC();
+            webRTC(id);
         }
         //닫기버튼 img
         var close = document.createElement('img');
